@@ -56,10 +56,11 @@ public class TwoSum {
   public int[] twoSum_better(int[] numbers, int target) {
     Map<Integer, Integer> map = new HashMap<>();
     for (int i = 0; i < numbers.length; i++) {
-      if (!map.containsKey(numbers[i]))
+      if (!map.containsKey(numbers[i])) {
         map.put(target - numbers[i], i + 1);
-      else
+      } else {
         return new int[] {map.get(numbers[i]), i + 1};
+      }
     }
     return new int[] {-1, -1};
   }
