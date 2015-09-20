@@ -82,7 +82,7 @@ public class SingleNumberIII {
   public List<int[]> createTestCases() {
     List<int[]> testcases = new ArrayList<>();
 
-    int[] num1 = {1, 2, 1, 2, 3, 5};
+    int[] num1 = {1, 2, 1, 2, 3, 6};
     testcases.add(num1);
     
     int[] num2 = {1,1,2,3};
