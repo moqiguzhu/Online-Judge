@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 描述：Given a binary tree, determine if it is height-balanced.
+ * 
+ * For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of
+ * the two subtrees of every node never differ by more than 1.
  * 
  * @author moqiguzhu
  * @version 1.0
@@ -12,14 +16,14 @@ import java.util.List;
 
 public class BalancedBinaryTree {
   boolean flag = true;
-  
+
   // 有点backtracking的味道
   // 还有点DFS的味道
   public boolean isBalanced(TreeNode root) {
     maxHeight(root, 0);
     return flag;
   }
-  
+
   public int maxHeight(TreeNode node, int height) {
     if (!flag) {
       return 0;

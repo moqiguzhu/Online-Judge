@@ -4,6 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 
+ * @author moqiguzhu
+ * @version 1.0
+ * @date 2015-09-25
+ */
 public class ExpressionAddOperators {
   public List<String> addOperators(String num, int target) {
     return null;

@@ -1,14 +1,17 @@
 package Leetcode;
 
 import java.util.Arrays;
+
 /**
  * @author moqiguzhu
  * @version 1.0
  * @date 2015-09-23
  */
 public class LongestPalindromicSubstring {
-  
+
   /**
+   * 描述：Given a string S, find the longest palindromic substring in S. You may assume that the
+   * maximum length of S is 1000, and there exists one unique longest palindromic substring.
    * DP.时间复杂度是n^2
    * 
    * @param s 原字符串
@@ -56,7 +59,7 @@ public class LongestPalindromicSubstring {
     }
     return s.substring(l + 1, r);
   }
-  
+
   /**
    * 
    * @param s 原字符串
