@@ -8,6 +8,7 @@ public class Utils {
       System.out.print(head.val + " ");
       head = head.next;
     }
+    
     System.out.println();
   }
 }
