@@ -9,7 +9,6 @@ public class Utils {
       head = head.next;
     }
     
-    
     System.out.println();
   }
 }
