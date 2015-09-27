@@ -46,4 +46,8 @@ public class ImplementQueueUsingStacks {
   public boolean empty() {
     return stack1.isEmpty() && stack2.isEmpty();
   }
+  
+  public static void main(String[] args) {
+    
+  }
 }
