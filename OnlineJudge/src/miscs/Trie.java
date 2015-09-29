@@ -1,7 +1,5 @@
 package miscs;
 
-import Leetcode.TreeNode;
-
 class TrieNode {
   // Initialize your data structure here.
   public TrieNode[] childs;

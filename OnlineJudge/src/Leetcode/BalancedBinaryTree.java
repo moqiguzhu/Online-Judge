@@ -3,6 +3,8 @@ package Leetcode;
 import java.util.ArrayList;
 import java.util.List;
 
+import DataStructure.TreeNode;
+
 /**
  * 描述：Given a binary tree, determine if it is height-balanced.
  * 
