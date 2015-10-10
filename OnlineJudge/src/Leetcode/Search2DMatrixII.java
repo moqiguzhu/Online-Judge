@@ -51,6 +51,7 @@ public class Search2DMatrixII {
     return flag || matrix[row_begin][col_begin] == target;
   }
 
+  // target > x 使得x的下标最大
   public int firstBigger(int[][] matrix, int row_col, int begin, int end, int tag, int target) {
     if (flag) {
       return 0;
@@ -83,7 +84,7 @@ public class Search2DMatrixII {
       return firstBigger(matrix, row_col, mid + 1, end, tag, target);
     }
   }
-
+  
   public List<int[][]> createTestcases() {
     List<int[][]> testcases = new ArrayList<>();
 
