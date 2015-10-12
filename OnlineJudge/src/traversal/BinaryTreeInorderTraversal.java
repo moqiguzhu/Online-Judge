@@ -34,7 +34,7 @@ public class BinaryTreeInorderTraversal {
     TreeNode root2 = new TreeNode(1);
     testcases.add(root2);
 
-    TreeNode root3 = new TreeNode(1);
+    TreeNode root3 = new TreeNode(1); 
     root3.left = new TreeNode(2);
     root3.left.left = new TreeNode(3);
     testcases.add(root3);

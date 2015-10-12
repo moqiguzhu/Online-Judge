@@ -1,4 +1,4 @@
-package Leetcode;
+package BFS;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -6,6 +6,12 @@ import java.util.LinkedList;
 import java.util.Set;
 
 /**
+ * Given a positive integer n, find the least number of perfect square numbers (for example, 1, 4,
+ * 9, 16, ...) which sum to n.
+ * 
+ * For example, given n = 12, return 3 because 12 = 4 + 4 + 4; given n = 13, return 2 because 13 = 4
+ * + 9.
+ * 
  * dp is faster than BFS
  * 
  * 一个总结：https://leetcode.com/discuss/58056/summary-of-different-solutions-bfs-static-and-mathematics
@@ -17,7 +23,6 @@ import java.util.Set;
  * @date 2015-10-12
  */
 public class PerfectSquares {
-  // 广度优先搜索
   public int bfs_numSquares(int n) {
     LinkedList<Integer> queue = new LinkedList<>();
     Set<Integer> visited = new HashSet<>();
