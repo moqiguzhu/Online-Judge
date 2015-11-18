@@ -44,6 +44,7 @@ public class Utils {
     
     if(root == null) {
       System.out.println(result);
+      return;
     }
     
     stack.push(root);
