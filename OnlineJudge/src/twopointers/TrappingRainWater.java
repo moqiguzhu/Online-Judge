@@ -1,6 +1,8 @@
 package twopointers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -131,10 +133,13 @@ public class TrappingRainWater {
   }
 
   public static void main(String[] args) {
-    TrappingRainWater trw = new TrappingRainWater();
-    List<int[]> testcases = trw.createTestCases();
-    for (int i = 0; i < testcases.size(); i++) {
-      System.out.println(trw.naive_trap(testcases.get(i)));
-    }
+//    TrappingRainWater trw = new TrappingRainWater();
+//    List<int[]> testcases = trw.createTestCases();
+//    for (int i = 0; i < testcases.size(); i++) {
+//      System.out.println(trw.naive_trap(testcases.get(i)));
+//    }
+    
+    String[] strArr = {"123", "113"};
+    System.out.println(Collections.min(Arrays.asList(strArr)));
   }
 }
