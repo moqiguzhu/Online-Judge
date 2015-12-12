@@ -5,7 +5,9 @@ import java.util.PriorityQueue;
 
 class MedianFinder {
   // low half是个大顶堆
-  PriorityQueue<Integer> lowHalf = new PriorityQueue<>(Collections.reverseOrder());
+  
+  // 兼容JDK7的写法
+  PriorityQueue<Integer> lowHalf = new PriorityQueue<>(0, Collections.reverseOrder());
   // high half是个小顶堆
   PriorityQueue<Integer> highHalf = new PriorityQueue<>();
 
