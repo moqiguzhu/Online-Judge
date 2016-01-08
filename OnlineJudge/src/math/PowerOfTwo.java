@@ -1,5 +1,10 @@
 package math;
 
+/**
+ * @author moqiguzhu
+ * @date 2015-01-08
+ * @version 1.0
+ */
 public class PowerOfTwo {
   public boolean isPowerOfTwo(int n) {
     return n > 0 && numberOfOneBits(n) == 1;

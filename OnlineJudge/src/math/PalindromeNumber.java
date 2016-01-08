@@ -1,5 +1,8 @@
 package math;
 
+/**
+ * @author moqiguzhu
+ */
 public class PalindromeNumber {
   // 负数不能是回文数
   public boolean isPalindrome(int x) {

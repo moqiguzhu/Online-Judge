@@ -39,7 +39,7 @@ public class Trie {
         tmp = node;
         continue;
       }
-      tmp = tmp.childs[pos]; // word是已经存在Trie中某个单词的前缀
+      tmp = tmp.childs[pos]; // word的前缀是已经存在Trie中某个单词的前缀
     }
     tmp.isLeaf = true;
   }
