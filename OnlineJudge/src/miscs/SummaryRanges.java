@@ -8,7 +8,7 @@ import java.util.List;
  * Pay attention to: 如果begin是null，下面这行语句会报空指针异常 begin == last
  * 
  * @author moqiguzhu
- * @date 2015-01-08
+ * @date 2016-01-08
  * @version 1.0
  */
 public class SummaryRanges {
