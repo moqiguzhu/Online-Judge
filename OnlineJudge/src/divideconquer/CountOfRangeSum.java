@@ -4,7 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-// divide and conquer + bst
+/**
+ * divide and conquer + bst
+ * 注意：根据主定律，T(N) = 2T(N/2) + nlogn的时间复杂度依然是nlogn
+ * @author moqiguzhu
+ * @date 2016-02-24
+ * @version 1.0
+ *
+ */
 public class CountOfRangeSum {
   public int countRangeSum(int[] nums, int lower, int upper) {
     if(nums== null || nums.length == 0) {
@@ -52,26 +59,38 @@ public class CountOfRangeSum {
     return sum;
   }
 
-  // return largest index which p[index] <= e 
-  int binsearch(int[] sortedArr, int lo, int hi, double e) {
-    assert(hi > lo);
-    while (lo < hi) {
-      int mi = ((hi - lo) >> 1) + lo;
-      if (e < sortedArr[mi]) {
-        hi = mi;
+  public int IndexMostLessOrEqual(int[] sortedArr, int left, int right, double target) {
+    assert(right > left);
+    while (left < right) {
+      int mid = ((right - left) >> 1) + left;
+      if (target < sortedArr[mid]) {
+        right = mid;
       } else {
-        lo = mi + 1;
+        left = mid + 1;
       }
     }
-    return --lo;
+    return --left;
+  }
+  
+  public int IndexLeastGreatOrEqual(int[] sortedArr, int left, int right, double target) {
+    assert(right > left);
+    while (right > left) {
+      int mid = ((right - left) >> 1) + left;
+      if (target <= sortedArr[mid]) {
+        right = mid;
+      } else {
+        left = mid + 1;
+      }
+    }
+
+    return left;
   }
   
   int numOfElementsInRange(int[] sortedArr, double low, double high) {
-    int low_index = binsearch(sortedArr, 0, sortedArr.length, low);
-    int high_index = binsearch(sortedArr, 0, sortedArr.length, high);
-    while(low_index >= 0 && sortedArr[low_index] == low) low_index--;
+    int low_index = IndexLeastGreatOrEqual(sortedArr, 0, sortedArr.length, low);
+    int high_index = IndexMostLessOrEqual(sortedArr, 0, sortedArr.length, high);
     
-    return high_index - low_index;
+    return high_index - low_index + 1;
   }
   
   public List<int[]> createTestcases() {
