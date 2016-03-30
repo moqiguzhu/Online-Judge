@@ -20,7 +20,7 @@ public class NextPermutation {
     if(x1 < 0) return null;
     
     x2 = str.length()-1;
-    while(str.charAt(x2) < str.charAt(x1)) {
+    while(str.charAt(x2) <= str.charAt(x1)) {
       x2--;
     }
     
