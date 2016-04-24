@@ -99,6 +99,32 @@ public class SerializeDeserializeBinaryTree {
     
     return root;
   }
+
+  public String preorder_serialize(TreeNode root) {
+    if (root == null) {
+      return "$";
+    }
+    return root.val + " " + serialize(root.left) + " " + serialize(root.right);
+  }
+
+  public TreeNode preorder_deserialize(String data) {
+    Scanner sc = new Scanner(data);
+    TreeNode root = build(sc);
+    sc.close();
+    
+    return root;
+  }
+
+  public TreeNode build(Scanner sc) {
+    if(!sc.hasNext()) return null;
+    String token = sc.next();
+    if(token.equals("$")) return null;
+    TreeNode root = new TreeNode(Integer.parseInt(token));
+    root.left = build(sc);
+    root.right = build(sc);
+    
+    return root;
+  }
   
   public List<TreeNode> createTestCases() {
     List<TreeNode> testcases = new ArrayList<TreeNode>();
