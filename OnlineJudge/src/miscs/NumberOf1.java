@@ -1,4 +1,4 @@
-package hiho.coordinates;
+package miscs;
 
 public class NumberOf1 {
   public int numberOf1(int n) {

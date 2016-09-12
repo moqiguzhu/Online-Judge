@@ -3,10 +3,10 @@ package Leetcode;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.Stack;
 
 import DataStructure.TreeNode;
-import Utils.Utils;
 
 public class SerializeDeserializeBinaryTree {
   // Encodes a tree to a single string.
@@ -129,29 +129,29 @@ public class SerializeDeserializeBinaryTree {
   public List<TreeNode> createTestCases() {
     List<TreeNode> testcases = new ArrayList<TreeNode>();
 
-//    TreeNode root1 = null;
-//    testcases.add(root1);
+    TreeNode root1 = null;
+    testcases.add(root1);
 
     TreeNode root2 = new TreeNode(1);
     root2.right = new TreeNode(2);
     testcases.add(root2);
 
-//    TreeNode root3 = new TreeNode(1);
-//    root3.left = new TreeNode(2);
-//    root3.left.left = new TreeNode(3);
-//    testcases.add(root3);
-//
-//    TreeNode root4 = new TreeNode(1);
-//    root4.left = new TreeNode(2);
-//    root4.right = new TreeNode(3);
-//    testcases.add(root4);
-//
-//    TreeNode root5 = new TreeNode(1);
-//    root5.left = new TreeNode(2);
-//    root5.right = new TreeNode(3);
-//    root5.right.left = new TreeNode(4);
-//    root5.right.right = new TreeNode(5);
-//    testcases.add(root5);
+    TreeNode root3 = new TreeNode(1);
+    root3.left = new TreeNode(2);
+    root3.left.left = new TreeNode(3);
+    testcases.add(root3);
+
+    TreeNode root4 = new TreeNode(1);
+    root4.left = new TreeNode(2);
+    root4.right = new TreeNode(3);
+    testcases.add(root4);
+
+    TreeNode root5 = new TreeNode(1);
+    root5.left = new TreeNode(2);
+    root5.right = new TreeNode(3);
+    root5.right.left = new TreeNode(4);
+    root5.right.right = new TreeNode(5);
+    testcases.add(root5);
 
     return testcases;
   }

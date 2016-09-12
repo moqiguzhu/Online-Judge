@@ -91,11 +91,11 @@ public class Search2DMatrixII {
     int[][] matrix1 = {{1, 4, 7, 11, 15}, {2, 5, 8, 12, 19}, {3, 6, 9, 16, 22},
         {10, 13, 14, 17, 24}, {18, 21, 23, 26, 30}};
 
-    // testcases.add(matrix1);
+    testcases.add(matrix1);
 
     int[][] matrix2 = {{1, 4}, {2, 5}};
 
-    // testcases.add(matrix2);
+    testcases.add(matrix2);
 
     int[][] matrix3 = {{1, 1}};
     testcases.add(matrix3);

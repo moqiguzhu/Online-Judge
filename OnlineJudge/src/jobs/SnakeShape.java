@@ -1,4 +1,4 @@
-package test2;
+package jobs;
 
 /**
  * 腾讯2016校招实习生笔试编程题最后一道

@@ -1,4 +1,4 @@
-package test;
+package jobs;
 
 // A B 是数组nums 中两个连续不相交的子数组，求max|sum(A) - sum(B)|
 public class bd1 {

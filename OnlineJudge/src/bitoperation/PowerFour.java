@@ -1,3 +1,4 @@
+package bitoperation;
 
 public class PowerFour {
   public boolean isPowerOfFour(int num) {

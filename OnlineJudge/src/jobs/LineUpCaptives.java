@@ -1,4 +1,4 @@
-package xxx;
+package jobs;
 
 import java.math.BigInteger;
 import java.util.HashMap;
@@ -50,9 +50,9 @@ public class LineUpCaptives {
         int begin = x;
         int end = n-y+1;
         
-        // ×î¸ßÍÃ×ÓµÄÎ»ÖÃ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½Î»ï¿½ï¿½
         for(int pos = begin; pos <= end; pos++) {
-        	// °ÑÍÃ×Ó·Ö³ÉÁ½²¿·ÖÓÐ¶àÉÙÖÖ·Ö·¨£¬×î¸ßµÄÍÃ×ÓÎ»ÖÃÒÑ¾­È·¶¨
+        	// ï¿½ï¿½ï¿½ï¿½ï¿½Ó·Ö³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½Ö·Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ßµï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½Ñ¾ï¿½È·ï¿½ï¿½
         	int left = pos - 1;
         	int right = n - pos;
         	BigInteger tmp = getCombine(n-1, left);
@@ -65,7 +65,7 @@ public class LineUpCaptives {
         return res.toString(10);
     } 
     
-    // totalÀïÃæÒªÇóvisible¸ö¿É¼û£¬·½°¸ÓÐ¶àÉÙÖÖ
+    // totalï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½visibleï¿½ï¿½ï¿½É¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½
     public static BigInteger help(int total, int visible) {
     	BigInteger res = BigInteger.ZERO;
     	if(total < visible) {
@@ -76,15 +76,15 @@ public class LineUpCaptives {
     		if(total_vis_num.containsKey(total) && total_vis_num.get(total).containsKey(visible)) {
     			res = total_vis_num.get(total).get(visible);
     		} else {
-    			// ×î¸ßÍÃ×ÓµÄÎ»ÖÃ
+    			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½Î»ï¿½ï¿½
     			for(int pos = 1; pos <= total; pos++) {
     				int left = pos - 1;
     				int right = total - pos;
-    				// ÓÐ¶àÉÙÖÖ·Ö·¨°ÑÍÃ×Ó·Ö³ÉÁ½²¿·Ö
+    				// ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½Ö·Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó·Ö³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     				BigInteger tmp1 = getCombine(total-1, left);
-    				// ÓÒ±ßÓÐ¶àÉÙÖÖÇé¿ö
+    				// ï¿½Ò±ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     				BigInteger tmp2 = getFac(right);
-    				// ×ó±ßÓÐ¶àÉÙÖÖÇé¿ö
+    				// ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     				BigInteger subProb = help(left, visible-1);
     				
     				res = res.add(subProb.multiply(tmp1.multiply(tmp2)));

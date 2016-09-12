@@ -1,4 +1,4 @@
-
+package math;
 /**
  * answer comes from https://leetcode.com/discuss/81411/java-three-methods-23ms-58ms-with-heap-performance-explained
  * 过早的优化是万恶之源，先找到一个naive solution

@@ -1,4 +1,4 @@
-package test;
+package miscs;
 
 public class PerfectSquare {
     public boolean isPerfectSquare(int num) {

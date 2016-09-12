@@ -1,4 +1,4 @@
-package test;
+package jobs;
 
 public class CarrotlandNaive {
 	private static double e = 1e-10;
