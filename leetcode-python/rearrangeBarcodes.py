@@ -16,12 +16,12 @@ class Barcode(object):
     def __eq__(self, other):
         if not self._is_valid_operand(other):
             return NotImplemented
-            return ((self.cnt, self.num) == (other.cnt, other.num))
+        return ((self.cnt, self.num) == (other.cnt, other.num))
 
     def __gt__(self, other):
         if not self._is_valid_operand(other):
             return NotImplemented
-            return ((self.cnt, self.num) > (other.cnt, other.num))
+        return ((self.cnt, self.num) > (other.cnt, other.num))
 
 
 class MyHeap(object):
