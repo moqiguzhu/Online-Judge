@@ -5,7 +5,7 @@ class Solution(object):
 		self.mid_res = {}
 
 	def findTargetSumWays(self, nums, S):
-		for idx, e in enumerate(nums):
+		for e in nums:
 			if len(self.part_sum) == 0:
 				self.part_sum.append(sum(nums))
 			self.part_sum.append(self.part_sum[-1] - e)

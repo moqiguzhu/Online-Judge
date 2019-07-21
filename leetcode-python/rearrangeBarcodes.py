@@ -39,7 +39,6 @@ class MyHeap(object):
     def pop(self):
         return heapq.heappop(self._data)[1]
 
-
 class Solution(object):
     def rearrangeBarcodes(self, barcodes):
         """
