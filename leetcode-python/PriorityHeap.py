@@ -18,6 +18,6 @@ class PriorityHeap(object):
 
     def pop(self):
         return heapq.heappop(self._data)[2]
-
-heap = PriorityHeap([1,2,2])
-print(heap.pop())
+    
+    def length(self):
+        return len(self._data)
