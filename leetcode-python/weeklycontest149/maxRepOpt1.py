@@ -18,7 +18,7 @@ class Solution:
         t.append((text[begin], end-begin, end-1))
         if len(t) == 1:
             return t[0][1]
-        print(t)
+        # print(t)
 
         d = {}
         for e in t:
@@ -26,7 +26,7 @@ class Solution:
                 d[e[0]] = 1
             else:
                 d[e[0]] += 1
-        print(d)
+        # print(d)
 
         i = 1
         res = 0
