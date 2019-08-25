@@ -12,9 +12,9 @@ class Solution:
         nums_sorted = sorted(nums)
         for e in nums:
             idx = bisect.bisect_left(nums_sorted, 2*e + 1)
-            res += bit.range_sum(idx+1, n)
+            res += bit.range_sum(idx, n-1)
             idx1 = bisect.bisect_left(nums_sorted, e)
-            bit.update(idx1+1, 1)
+            bit.update(idx1, 1)
         return res
 
 
