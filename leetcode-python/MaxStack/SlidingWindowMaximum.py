@@ -4,6 +4,8 @@ from MaxQueue import MaxQueue
 
 class Solution:
     def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        if nums is None or len(nums) < 1:
+            return []
         res = []
         mq = MaxQueue(nums[0:k])
         for i in range(k, len(nums)):
