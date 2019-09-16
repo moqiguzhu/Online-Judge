@@ -7,7 +7,9 @@ from line_profiler import LineProfiler
 try:
     profile  # throws an exception when profile isn't defined
 except NameError:
-    profile = lambda x: x   # if it's not defined simply ignore the decorator.
+    # if it's not defined simply ignore the decorator.
+    def profile(x): return x
+
 
 class UnionFind(object):
     def __init__(self, eles):
@@ -126,6 +128,7 @@ class Solution:
             if e in primes:
                 prime_l[e].append(e)
                 continue
+            # [prime_l[p].append(e) if e % p == 0 else None for p in primes]
             for p in primes:
                 if e % p == 0:
                     prime_l[p].append(e)
