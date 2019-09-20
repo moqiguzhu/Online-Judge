@@ -12,8 +12,8 @@ class STATE(object):
 
     def add_children(self, label, child):
         self.children[label] = child
-        # 为什么这个sig能够work？能不能work？
-        self.signature = str(label) + ',' + str(child.no)
+        self.signature = ','.join([str(v)+','+k
+                                   for k, v in self.children.items()])
         self.last_child = child
         self.last_label = label
 
@@ -23,8 +23,8 @@ class STATE(object):
     def remove_child(self, label, equi_state):
         self.children[label] = equi_state
         self.last_child = equi_state
-        self.signature = str(label) + \
-            ',' + str(equi_state.no)
+        self.signature = ','.join([str(v)+','+k
+                                   for k, v in self.children.items()])
 
     def has_children(self):
         return len(self.children) > 0
@@ -67,7 +67,7 @@ class FSA(object):
         if self.final is None:
             self.final = child
             # 因为final没有出度，sig仅仅由no组成
-            self.register_states[str(self.final.no)] = self.final
+            self.register_states['-1'] = self.final
 
     def replace_or_register(self, state):
         child = state.last_child
@@ -78,13 +78,11 @@ class FSA(object):
             state.remove_child(state.last_label, self.final)
             return
         else:
-            sig = str(child.last_label) + \
-                ',' + str(child.last_child.no)
+            sig = state.get_child(state.last_label).signature
         if sig in self.register_states:
             state.remove_child(state.last_label, self.register_states[sig])
         else:
             self.register_states[sig] = child
-        # print(self.register_states)
 
 
 def print_fsa(st, cur_str, cur_no_str):
@@ -97,6 +95,6 @@ def print_fsa(st, cur_str, cur_no_str):
 
 
 # 状态8是不是还存在
-strs = ['mon', 'thurs', 'tues', 'ttt', 'xxx', 'yyy']
+strs = ['mon', 'thurs', 'tues']
 fsa = FSA(strs)
 print_fsa([fsa.root], '', '')
