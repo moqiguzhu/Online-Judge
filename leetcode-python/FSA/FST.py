@@ -1,7 +1,16 @@
-import string
-import random
-from collections import defaultdict
+import timeit
 from collections import deque
+from collections import defaultdict
+import random
+import string
+import sys
+import time
+
+try:
+    from Trie import Trie
+except:
+    sys.path.append('..')
+    from Trie import Trie
 
 
 class STATE(object):
@@ -141,10 +150,17 @@ def print_fst(st, cur_str, cur_no_str):
                   str(v[1]) + ',', cur_no_str + str(v[0].no))
 
 
-strs = ['mon', 'thurs', 'tues', 'tye', 'tyx']
-values = [2, 5, 3, 99, 1]
-fst = FST(strs, values)
-print_fst([(fst.root, -1)], '', '')
+def trie_node_count(cur_node):
+    t = 0
+    for k, v in cur_node.children.items():
+        t += trie_node_count(v)
+    return t + len(cur_node.children)
+
+
+# strs = ['mon', 'thurs', 'tues', 'tye', 'tyx']
+# values = [2, 5, 3, 99, 1]
+# fst = FST(strs, values)
+# print_fst([(fst.root, -1)], '', '')
 
 # strs = ['Abderian']
 # values = [0]
@@ -181,12 +197,43 @@ if __name__ == "__main__":
     strs = sorted(strs)
     fst = FST(strs, values)
     actual_state_count = fst.actual_state_count()
-    print('total letters counting: %s' % (str(total_state_count)))
-    print('FST letters counting: %s' % (str(actual_state_count)))
+
+    trie = Trie(strs)
+    trie_node_count = trie_node_count(trie.root)
+    print('Trie letters counting: %s' % (str(trie_node_count)))
+
+    p_d = {}
+    for s in strs:
+        p_d[s] = 0
+
+    start = time.process_time()
+    t1 = [fst.contains(s) for s in strs]
+    gap1 = time.process_time() - start
+    start = time.process_time()
+    t2 = [trie.search(s) for s in strs]
+    gap2 = time.process_time() - start
+    start = time.process_time()
+    t3 = [s in p_d for s in strs]
+    gap3 = time.process_time() - start
+
+    print('Space comparison with Python dict, Trie and FST')
+    print('total letters counting for Python dict: %s' %
+          (str(total_state_count)))
+    print('total letters counting for Trie: %s' % (str(trie_node_count)))
+    print('total letters counting for FST: %s' % (str(actual_state_count)))
+
+    print("\n#######################################################\n")
+    print('Time comparison with Python dict, Trie and FST')
+    print('average search time for Python dict: %s ns' %
+          (str(int(gap3 / len(strs) * 10**9))))
+    print('average search time for Trie: %s ns' %
+          (str(int(gap2 / len(strs) * 10**9))))
+    print('average search time for FST: %s ns' %
+          (str(int(gap1 / len(strs) * 10**9))))
 
     # 进一步判断构造的FST是不是正确
-    count = 0
-    for s in strs:
-        if not fst.contains(s):
-            print(s)
-            count += 1
+    # count = 0
+    # for s in strs:
+    #     if not fst.contains(s):
+    #         print(s)
+    #         count += 1
