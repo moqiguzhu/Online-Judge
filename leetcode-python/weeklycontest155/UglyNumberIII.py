@@ -2,6 +2,7 @@ class Solution:
     def nthUglyNumber(self, n: int, a: int, b: int, c: int) -> int:
         # 二分查找啊
         # 这么简单没想到
+        pass
 
 
 s = Solution()
