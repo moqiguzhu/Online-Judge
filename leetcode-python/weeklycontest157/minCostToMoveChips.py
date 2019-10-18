@@ -17,8 +17,6 @@ class Solution:
             if flag2 and pos % 2 == 1:
                 top2 = pos
                 flag2 = False
-        print(top1)
-        print(top2)
         res1, res2 = 0, 0
         if top1 == -1:
             res1 = 10**9+1
