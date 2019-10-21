@@ -66,16 +66,22 @@ class RMQ(object):
                 res = res if res < self.nums[idx] else self.nums[idx]
             return res
         elif self.method == 'blocking':
-            return min(self.block_min[i//self.block_size+1:j//self.block_size] +
-                       self.nums[i:self.block_size*(i//self.block_size+1)] +
-                       self.nums[self.block_size*(j//self.block_size):j+1])
+            if i//self.block_size == j//self.block_size:
+                return min(self.nums[i:j+1])
+            else:
+                return min(self.block_min[i//self.block_size+1:j//self.block_size] +
+                           self.nums[i:self.block_size*(i//self.block_size+1)] +
+                           self.nums[self.block_size*(j//self.block_size):j+1])
 
 
+# 测试程序
 nums = [31, 41, 59, 26, 53, 58, 97, 93]
-rmq = RMQ(nums, 'blocking', 2)
-print(rmq.block_min)
-assert(rmq.query(0, 0) == 31)
-assert(rmq.query(0, 1) == 31)
-assert(rmq.query(0, 3) == 26)
-assert(rmq.query(2, 7) == 26)
-assert(rmq.query(5, 7) == 58)
+rmq1 = RMQ(nums, 'blocking', 2)
+rmq2 = RMQ(nums, 'precompute_none')
+rmq3 = RMQ(nums, 'precompute_all')
+rmq4 = RMQ(nums, 'sparse_table')
+rmqs = [rmq1, rmq2, rmq3, rmq4]
+for rmq in rmqs:
+    for i in range(len(nums)):
+        for j in range(i, len(nums), 1):
+            assert(min(nums[i:j+1]) == rmq.query(i, j))
