@@ -76,7 +76,7 @@ class RMQ_BASE(object):
 
 
 # 测试程序
-nums = [31, 41, 59, 26, 53, 58, 97, 93]
+nums = [31, 41, 59, 26, 53, 58, 97, 93, 100, -1]
 rmq1 = RMQ_BASE(nums, 'blocking', 2)
 rmq2 = RMQ_BASE(nums, 'precompute_none')
 rmq3 = RMQ_BASE(nums, 'precompute_all')
