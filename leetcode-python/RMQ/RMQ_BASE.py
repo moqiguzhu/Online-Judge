@@ -1,7 +1,7 @@
 from collections import defaultdict
 
 
-class RMQ(object):
+class RMQ_BASE(object):
     def __init__(self, nums, method='sparse_table', block_size=50):
         assert(nums is not None)
         assert(len(nums) > 1)
@@ -18,6 +18,7 @@ class RMQ(object):
         elif self.method == 'precompute_none':
             pass
         elif self.method == 'blocking':
+            # if block_size = 'O(n^0.5)' O(n) build time, O(n^0.5) query time
             self.block_min = [self.M] * (self.n // self.block_size + 1)
             self.blocking()
         elif self.method == 'sparse_table':
@@ -33,9 +34,6 @@ class RMQ(object):
             for j in range(i, self.n+1, 1):
                 self.pair_min[i][j] = min(
                     self.pair_min[i][j-1], self.nums[j-1])
-
-    def precompute_none(self):
-        pass
 
     def blocking(self):
         for i in range(self.n):
@@ -53,6 +51,9 @@ class RMQ(object):
                 if i + gap <= self.n:
                     self.sparse_table[i][k] = min(
                         self.sparse_table[i][k-1], self.sparse_table[i+(gap >> 1)][k-1])
+
+    def hybrid(self):
+        pass
 
     def query(self, i, j):
         if self.method == 'precompute_all':
@@ -76,10 +77,10 @@ class RMQ(object):
 
 # 测试程序
 nums = [31, 41, 59, 26, 53, 58, 97, 93]
-rmq1 = RMQ(nums, 'blocking', 2)
-rmq2 = RMQ(nums, 'precompute_none')
-rmq3 = RMQ(nums, 'precompute_all')
-rmq4 = RMQ(nums, 'sparse_table')
+rmq1 = RMQ_BASE(nums, 'blocking', 2)
+rmq2 = RMQ_BASE(nums, 'precompute_none')
+rmq3 = RMQ_BASE(nums, 'precompute_all')
+rmq4 = RMQ_BASE(nums, 'sparse_table')
 rmqs = [rmq1, rmq2, rmq3, rmq4]
 for rmq in rmqs:
     for i in range(len(nums)):

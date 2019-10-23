@@ -1,20 +1,39 @@
 from typing import List
+import bisect
+from collections import defaultdict
 
 
 class Solution:
     def jobScheduling(self, startTime: List[int], endTime: List[int], profit: List[int]) -> int:
         # 背包问题，典型的dp
         jobs = zip(startTime, endTime, profit)
-        jobs = sorted(jobs, lambda x: x[1])
-        max_end_time = jobs[-1][1] + 1
-        dp = [0] * max_end_time
+        jobs = sorted(jobs, key=lambda x: x[1])
+        dp = defaultdict(int)
 
-        idx, cur_end_time = 0, jobs[0][1]
-        for i in range(jobs[-1][1]):
-            if i == cur_end_time:
-                dp[i] = max(dp[i-endTime]+jobs[idx][2], dp[i-1])
-                idx += 1
-                cur_end_time = jobs[idx][1]
+        print(jobs)
+        # 我有一个更好的idea nlogn复杂度
+        i = 0
+        cur_max = 0
+        t = []
+        for s, e, p in jobs:
+            if i == 0:
+                dp[e] = p
+                cur_max = dp[e]
             else:
-                dp[i] = dp[i-1]
-        return dp[max_end_time]
+                idx = bisect.bisect_right(t, s)
+                if idx < 1:
+                    tt = 0
+                else:
+                    tt = dp[t[idx-1]]
+                dp[e] = max(cur_max, tt + p)
+                cur_max = dp[e]
+            t.append(e)
+            i += 1
+        return cur_max
+
+
+s = Solution()
+startTime = [1, 1, 1]
+endTime = [2, 3, 4]
+profit = [5, 6, 4]
+print(s.jobScheduling(startTime, endTime, profit))
