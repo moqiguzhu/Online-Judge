@@ -26,6 +26,10 @@ class RMQ_BASE(object):
             self.k = self.n.bit_length() - 1
             self.sparse_table = [[self.M] * (self.k+1) for _ in range(self.n)]
             self.precompute_sparse_table()
+        elif self.method == 'precompute_all_index':
+            self.pair_min_index = [[self.M] *
+                                   (self.n+1) for _ in range(self.n+1)]
+            self.precompute_all_index()
         else:
             pass
 
@@ -34,6 +38,16 @@ class RMQ_BASE(object):
             for j in range(i, self.n+1, 1):
                 self.pair_min[i][j] = min(
                     self.pair_min[i][j-1], self.nums[j-1])
+    # 存储的全部是index
+    # 计算的是一类数组的RMQ信息
+
+    def precompute_all_index(self):
+        for i in range(1, self.n+1, 1):
+            curmin_idx = i-1
+            for j in range(i, self.n+1, 1):
+                if i != j and self.nums[self.pair_min_index[i][j-1]] > self.nums[j-1]:
+                    curmin_idx = j-1
+                self.pair_min_index[i][j] = curmin_idx
 
     def blocking(self):
         for i in range(self.n):
@@ -55,7 +69,7 @@ class RMQ_BASE(object):
     def hybrid(self):
         pass
 
-    def query(self, i, j):
+    def query(self, i, j, nums=[]):
         if self.method == 'precompute_all':
             return self.pair_min[i+1][j+1]
         elif self.method == 'sparse_table':
@@ -73,16 +87,27 @@ class RMQ_BASE(object):
                 return min(self.block_min[i//self.block_size+1:j//self.block_size] +
                            self.nums[i:self.block_size*(i//self.block_size+1)] +
                            self.nums[self.block_size*(j//self.block_size):j+1])
+        # 因为存储的是index信息
+        # 所以在查询的时候需要把当前实际数组带进来
+        # 调用方保证传进来的nums与发起调用的RMQ结构能够对应上
+        elif self.method == 'precompute_all_index':
+            return nums[self.pair_min_index[i+1][j+1]]
+        else:
+            pass
 
 
 # 测试程序
-nums = [31, 41, 59, 26, 53, 58, 97, 93, 100, -1]
-rmq1 = RMQ_BASE(nums, 'blocking', 2)
-rmq2 = RMQ_BASE(nums, 'precompute_none')
-rmq3 = RMQ_BASE(nums, 'precompute_all')
-rmq4 = RMQ_BASE(nums, 'sparse_table')
-rmqs = [rmq1, rmq2, rmq3, rmq4]
-for rmq in rmqs:
-    for i in range(len(nums)):
-        for j in range(i, len(nums), 1):
-            assert(min(nums[i:j+1]) == rmq.query(i, j))
+if __name__ == '__main__':
+    nums = [31, 41, 59, 26, 53, 58, 97, 93, 100, -1]
+    rmq1 = RMQ_BASE(nums, 'blocking', 2)
+    rmq2 = RMQ_BASE(nums, 'precompute_none')
+    rmq3 = RMQ_BASE(nums, 'precompute_all')
+    rmq4 = RMQ_BASE(nums, 'sparse_table')
+    rmq5 = RMQ_BASE(nums, 'precompute_all_index')
+
+    rmqs = [rmq1, rmq2, rmq3, rmq4, rmq5]
+
+    for rmq in rmqs:
+        for i in range(len(nums)):
+            for j in range(i, len(nums), 1):
+                assert(min(nums[i:j+1]) == rmq.query(i, j, nums))

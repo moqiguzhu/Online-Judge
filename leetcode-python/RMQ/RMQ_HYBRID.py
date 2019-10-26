@@ -34,33 +34,38 @@ class RMQ_HYBRID(object):
                 self.block_min[i//self.block_size], self.nums[i])
             if (i + 1) % self.block_size == 0:
                 rmq = RMQ_BASE(
-                    self.nums[i//self.block_size*self.block_size:(i//self.block_size+1)*self.block_size], 'sparse_table')
+                    self.nums[i+1-self.block_size:i+1], 'sparse_table')
                 self.bottom_structure.append(rmq)
 
     def query(self, i, j):
+        relative_i, relative_j = i-i//self.block_size * \
+            self.block_size, j-j//self.block_size*self.block_size
+
         if i // self.block_size == j // self.block_size:
-            return self.bottom_structure[i//self.block_size].query(i-i//self.block_size*self.block_size, j-j//self.block_size*self.block_size)
+            return self.bottom_structure[i//self.block_size].query(relative_i, relative_j)
         elif i // self.block_size + 1 == j // self.block_size:
             return min(
                 self.bottom_structure[i//self.block_size].query(
-                    i-i//self.block_size*self.block_size, self.block_size-1),
+                    relative_i, self.block_size-1),
                 self.bottom_structure[j//self.block_size].query(
-                    0, j-j//self.block_size*self.block_size)
+                    0, relative_j)
             )
         else:
             return min(
                 self.bottom_structure[i//self.block_size].query(
-                    i-i//self.block_size*self.block_size, self.block_size-1),
+                    relative_i, self.block_size-1),
                 self.bottom_structure[j//self.block_size].query(
-                    0, j-j//self.block_size*self.block_size),
+                    0, relative_j),
                 self.top_structure.query(
                     i//self.block_size+1, j//self.block_size-1)
             )
 
 
-nums = [31, 41, 59, 26, 53]
-rmq_hybrid = RMQ_HYBRID(nums)
+if __name__ == "__main__":
+    print('开始测试RMQ_HYBRID:')
+    nums = [31, 41, 59, 26, 53]
+    rmq_hybrid = RMQ_HYBRID(nums)
 
-for i in range(len(nums)):
-    for j in range(i, len(nums)):
-        assert(min(nums[i:j+1]) == rmq_hybrid.query(i, j))
+    for i in range(len(nums)):
+        for j in range(i, len(nums)):
+            assert(min(nums[i:j+1]) == rmq_hybrid.query(i, j))
