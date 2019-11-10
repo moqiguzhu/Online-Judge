@@ -98,6 +98,7 @@ class RMQ_BASE(object):
 
 # 测试程序
 if __name__ == '__main__':
+    print('开始测试RMQ_BASE:')
     nums = [31, 41, 59, 26, 53, 58, 97, 93, 100, -1]
     rmq1 = RMQ_BASE(nums, 'blocking', 2)
     rmq2 = RMQ_BASE(nums, 'precompute_none')
