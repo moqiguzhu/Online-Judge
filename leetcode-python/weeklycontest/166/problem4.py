@@ -5,6 +5,8 @@ import copy
 import numpy as np
 import random
 
+# BFS会更简单 效率也高的多
+
 
 class Solution:
     # 花式调参解决问题
