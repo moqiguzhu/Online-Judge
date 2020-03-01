@@ -7,16 +7,20 @@ import numpy as np
 
 
 class Solution:
-    def sumZero(self, n: int) -> List[int]:
-        res = []
-        for i in range(1, n // 2+1, 1):
-            res.append(i)
-            res.append(-i)
-        if n % 2 != 0:
-            res.append(0)
-        return res
+    def kWeakestRows(self, mat: List[List[int]], k: int) -> List[int]:
+        n, m = len(mat), len(mat[0])
+        t = []
+        for i in range(n):
+            t.append((i, sum(mat[i])))
+        t.sort(key=lambda x: (x[1], x[0]))
+        return [x[0] for x in t][:k]
 
 
 if __name__ == '__main__':
     s = Solution()
-    print(s.sumZero(5))
+    mat = [[1, 0, 0, 0],
+           [1, 1, 1, 1],
+           [1, 0, 0, 0],
+           [1, 0, 0, 0]]
+    k = 2
+    print(s.kWeakestRows(mat, k))

@@ -5,35 +5,57 @@ import copy
 import random
 import numpy as np
 
-# BFS
+# Definition for a binary tree node.
+
+
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
 
 
 class Solution:
-    def canReach(self, arr: List[int], start: int) -> bool:
-        visited = set()
-        q = deque()
-        q.append(start)
-        n = len(arr)
-        remained = set([idx for idx, e in enumerate(arr) if e == 0])
+    def __init__(self):
+        self.candidates = []
+        self.M = 10**9 + 7
 
-        while len(q) > 0:
-            t = deque()
-            for e in q:
-                if n > e + arr[e] >= 0 and e + arr[e] not in visited:
-                    t.append(e + arr[e])
-                if n > e - arr[e] >= 0 and e - arr[e] not in visited:
-                    t.append(e - arr[e])
-                visited.add(e)
-                if e in remained:
-                    return True
-            print(visited)
-            if len(t) == 0:
-                return False
-            q = t
+    def maxProduct(self, root: TreeNode) -> int:
+        self.cursum(root)
+        s = self.candidates[-1]
+        res = 0
+        for i in range(0, len(self.candidates)-1):
+            res = max((s-self.candidates[i]) * self.candidates[i], res)
+        return res % self.M
+
+    def cursum(self, root):
+        if root.left is not None:
+            t1 = self.cursum(root.left)
+        else:
+            t1 = 0
+        if root.right is not None:
+            t2 = self.cursum(root.right)
+        else:
+            t2 = 0
+        t = t1 + t2 + root.val
+        self.candidates.append(t)
+        return t
 
 
 if __name__ == '__main__':
     s = Solution()
-    arr = [0, 3, 0, 6, 3, 3, 4]
-    start = 6
-    print(s.canReach(arr, start))
+    t1 = TreeNode(4)
+    t2 = TreeNode(5)
+    t3 = TreeNode(2)
+    t3.left = t1
+    t3.right = t2
+
+    t4 = TreeNode(6)
+    t5 = TreeNode(3)
+    t5.left = t4
+
+    t6 = TreeNode(1)
+    t6.left = t3
+    t6.right = t5
+
+    print(s.maxProduct(t6))
