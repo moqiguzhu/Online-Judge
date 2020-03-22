@@ -22,9 +22,7 @@ class Solution:
         manager_sub = defaultdict(list)
         for idx, e in enumerate(manager):
             manager_sub[e].append(idx)
-        print(manager_sub)
         self.dfs(0, headID, manager_sub, informTime)
-        print(self.res)
         return max(self.res)
 
     def dfs(self, cur_res, cur, manager_sub, informTime):

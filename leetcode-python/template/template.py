@@ -4,6 +4,7 @@ import math
 import copy
 import random
 import numpy as np
+import bisect
 
 
 class Solution(object):
