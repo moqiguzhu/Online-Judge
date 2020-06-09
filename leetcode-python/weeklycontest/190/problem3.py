@@ -25,20 +25,21 @@ class Solution:
         if root is None:
             return 0
         else:
-            return self.findpath(root, [root.val])
+            self.findpath(root, [root.val])
+            return self.res
 
     def findpath(self, cur, cur_path=[]):
         if cur.left is None and cur.right is None:
             self.res += self.is_palindrome(cur_path)
 
         if cur.left is not None:
-            self.findpath(cur.left, cur_path + cur.left.val)
+            self.findpath(cur.left, cur_path + [cur.left.val])
         if cur.right is not None:
-            self.findpath(cur.right, cur_path + cur.right.val)
+            self.findpath(cur.right, cur_path + [cur.right.val])
 
     def is_palindrome(self, path):
         c = Counter(path)
         odd_cnt = 0
-        for num, freq in c:
+        for num, freq in c.items():
             odd_cnt += freq % 2
-        return odd_cnt < 2
+        return 1 if odd_cnt < 2 else 0

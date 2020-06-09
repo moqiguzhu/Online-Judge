@@ -8,7 +8,7 @@ from collections import deque
 # 构建过程分两步，第一步先构建字典树
 # 第二部分，BFS遍历字典树，遍历的过程中添加两种link
 # 具体过程是：根结点没有suffix link， 第一层节点的suffix link指向根节点
-# 从第二层开始，每个节点的suffix link：找到节点v的上一个节点u， u到v的label为l，找到u的suffix link指向的节点p，如果p有一条label为l的边，那么u的suufix link就是从p开始，label为l的边指向的节点
+# 从第二层开始，每个节点的suffix link：找到节点v的上一个节点u， u到v的label为l，找到u的suffix link指向的节点p，如果p有一条label为l的边，那么u的suffix link就是从p开始，label为l的边指向的节点
 # output link：如果一条suffix link指向终节点，那么这条suffix link也是一条output link
 # 还有一种情况，虽然suffix link没有直接指向终节点，但是suffix link的suffix link指向终节点，那么此时需要增加一条当前节点到该终节点的output link
 
