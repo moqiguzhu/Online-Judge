@@ -13,7 +13,7 @@ class TreeNode(object):
     def __init__(self, parent, label, level):
         self.parent = parent
         self.label = label
-        self.level = 0
+        self.level = level
 
 # TLE
 
@@ -53,11 +53,8 @@ class TreeAncestor:
 
 
 if __name__ == "__main__":
-    n = 7
-    parent = [-1, 0, 0, 1, 1, 2, 2]
+    n = 50000
+    parent = [-1] + list(range(49999))
     treeAncestor = TreeAncestor(n, parent)
 
-    print(treeAncestor.getKthAncestor(3, 1))
-    print(treeAncestor.getKthAncestor(5, 2))
-    print(treeAncestor.getKthAncestor(6, 3))
-    print(treeAncestor.getKthAncestor(0, 0))
+    print(treeAncestor.getKthAncestor(41998, 40146))
