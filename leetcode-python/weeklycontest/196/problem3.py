@@ -8,6 +8,8 @@ import bisect
 import inspect
 import unittest
 
+# brute-force 可以解决问题
+
 
 class Solution:
     # 这个方法考虑不全面, 很多case不能通过
