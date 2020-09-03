@@ -34,3 +34,4 @@ class TreeNode:
 
 
 def problem2(root):
+    pass
