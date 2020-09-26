@@ -25,19 +25,18 @@ class TreeNode:
 
 
 class Solution:
-    def __init__(self):
-        self.head = None
+    # Time O(N * min(L,H))
+    # Space O(H)
+    # where N = tree size, H = tree height, L = list length.
 
     def isSubPath(self, head: ListNode, root: TreeNode) -> bool:
-        self.head = head
+        if head is None:
+            return True
+        if root is None:
+            return False
 
-        return self.helper(head, root)
+        return self.helper(head, root) or self.isSubPath(head, root.left) or self.isSubPath(head, root.right)
 
-    # 思路有问题
-    # 需要回溯
-    # !!! 有一个办法是记住回溯点 回溯点就是==时的left、right
-    # 但是这样效率可能会成为一个问题
-    # 一旦找到答案, 马上退出
     def helper(self, curhead, curroot):
         if curhead is None:
             return True
@@ -46,10 +45,7 @@ class Solution:
         if curhead.val == curroot.val:
             return self.helper(curhead.next, curroot.left) or self.helper(curhead.next, curroot.right)
         else:
-            if self.head.val == curroot.val:
-                return (self.helper(self.head.next, curroot.left)) or (self.helper(self.head.next, curroot.right))
-            else:
-                return (self.helper(self.head, curroot.left)) or (self.helper(self.head, curroot.right))
+            return False
 
 
 if __name__ == '__main__':

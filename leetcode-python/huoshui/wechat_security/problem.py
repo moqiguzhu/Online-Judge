@@ -28,7 +28,7 @@ def problem1(file_path):
 
 class TreeNode:
     def __init__(self, val):
-        self.val = x
+        self.val = val
         self.left = None
         self.right = None
 

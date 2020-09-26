@@ -39,8 +39,9 @@ class MyHeap(object):
     def pop(self):
         return heapq.heappop(self._data)[1]
 
+
 class Solution(object):
-    def rearrangeBarcodes(self, barcodes):
+    def rearrangeBarcodes1(self, barcodes):
         """
         :type barcodes: List[int]
         :rtype: List[int]
@@ -68,5 +69,15 @@ class Solution(object):
                     myheap.push(t1)
 
         return res
+    # https://leetcode.com/problems/distant-barcodes/discuss/299225/JavaPython-Set-Odd-Position-and-Even-Position
 
-
+    def rearrangeBarcodes(self, packages):
+        i, n = 0, len(packages)
+        res = [0] * n
+        for k, v in Counter(packages).most_common():
+            for _ in range(v):
+                res[i] = k
+                i += 2
+                if i >= n:
+                    i = 1
+        return res

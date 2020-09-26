@@ -20,6 +20,21 @@ def cmp(e1, e2):
 
 class Solution:
     def getStrongest(self, arr: List[int], k: int) -> List[int]:
+        arr = sorted(arr)
+        i, j = 0, len(arr) - 1
+        median = arr[j // 2]
+        res = []
+        while len(res) < k:
+            if abs(arr[j] - median) >= abs(median - arr[i]):
+                res.append(arr[j])
+                j -= 1
+            else:
+                res.append(arr[i])
+                i += 1
+        return res
+
+    # 思路不对
+    def getStrongest1(self, arr: List[int], k: int) -> List[int]:
         n = len(arr)
         assert(n >= k)
         if k == 0:
@@ -73,6 +88,6 @@ class Solution:
 
 if __name__ == '__main__':
     s = Solution()
-    arr = [2, 2, 2, 2, 2, 2, 2, 2]
-    k = 5
+    arr = [6, -3, 7, 2, 11]
+    k = 3
     print(s.getStrongest(arr, k))
