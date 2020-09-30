@@ -27,7 +27,7 @@ class TreeNode:
 class Solution:
     # Time O(N * min(L,H))
     # Space O(H)
-    # where N = tree size, H = tree height, L = list length.
+    #    where N = tree size, H = tree height, L = list length.
 
     def isSubPath(self, head: ListNode, root: TreeNode) -> bool:
         if head is None:

@@ -1,2 +1,16 @@
+# Ignore all
+*
+
+# Unignore all with extensions
+!*.*
+
+# Unignore all dirs
+!*/
+
+### Above combination will ignore all files without extension ###
+
 leetcode-python/test.py
 .DS_Store
+leetcode-cpp/*.exe
+leetcode-cpp/*.out
+leetcode-cpp/*.app
