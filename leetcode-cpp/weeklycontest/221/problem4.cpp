@@ -4,22 +4,22 @@
 #include <iostream>
 #include <map>
 #include <regex>
+#include <set>
 #include <stack>
 #include <unordered_map>
 #include <vector>
-
 using namespace std;
 
 bool compare(const int &e1, const int &e2) { return e1 < e2; }
 
-// 思路有了,代码写不出来
-// debug
+// tle
 class Solution {
-public:
-  vector<int> maximizeXor(vector<int> &nums, vector<vector<int>> &queries) {
+ public:
+  vector<int> maximizeXor(vector<int> &nums,
+                           vector<vector<int>> &queries) {  // 这个实现好蠢
     sort(nums.begin(), nums.end(), compare);
     int x, m;
-    vector<int> idx;
+    vector<int> idx;  // 这里设计有问题，正确的设计是一棵字典树
     vector<int> res;
     for (int k = 0; k <= 30; k++) {
       auto t = std::lower_bound(nums.begin(), nums.end(), 1 << k);
@@ -40,19 +40,24 @@ public:
         continue;
       }
       for (int k = 30; k >= 0; k--) {
-        cout << left << " " << right << endl;
+        // cout << left << " " << right << endl;
         if (left == right) {
-          res.push_back(x ^ nums[left]);
           break;
         }
-        if (x < (1 << k)) {
-          if (idx[k] != nums.size()) {
+        if (idx[k] <= right && idx[k] >= left && idx[k] - 1 >= left) {
+          // cout << (x & (1 << k)) << endl;
+          if ((x & (1 << k)) == 0) {
             left = max(left, idx[k]);
+          } else {
+            right = min(right, idx[k] - 1);
           }
-        } else {
-          right = min(right, idx[k] - 1);
         }
       }
+      int t = 0;
+      for (int i = left; i <= right; i++) {
+        t = max(t, x ^ nums[i]);
+      }
+      res.push_back(t);
     }
     return res;
   }
@@ -60,8 +65,11 @@ public:
 
 int main() {
   Solution s;
-  vector<int> nums = {0, 1, 2, 3, 4};
-  vector<vector<int>> queries = {{3, 1}, {1, 3}, {5, 6}};
+  vector<int> nums = {245405671, 478954451, 192656583, 756912244, 536870912,
+                      536870912, 632641004, 536870912, 536870912, 885997335,
+                      66102331,  96363044,  456847995, 969641794, 56056493,
+                      929047056, 239297896, 536870912, 36418831,  394600426};
+  vector<vector<int>> queries = {{345073691, 1000000000}};
   auto res = s.maximizeXor(nums, queries);
   for (auto e : res) {
     cout << e << endl;
