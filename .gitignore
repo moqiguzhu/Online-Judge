@@ -15,3 +15,4 @@ leetcode-cpp/*.exe
 leetcode-cpp/*.out
 leetcode-cpp/*.app
 leetcode-cpp/*.dSYM
+.vscode/*
