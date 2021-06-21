@@ -17,7 +17,9 @@ void threadFunc(int mark, std::vector<int> &vec) {
 }
 
 // LD_LIBRARY_PATH="/usr/local/lib";
-// 运行前写这行，LD_LIBRARY_PATH设置在环境变量中没有生效
+// 运行前写这行，LD_LIBRARY_PATH设置在环境变量中没有生效  -lpthread -lboost_thread 这两行参数也不能少
+// LD_LIBRARY_PATH="/usr/local/lib"; cd "/home/andylei/Online-Judge/leetcode-cpp/multithread/" && g++ testmt.cpp -o testmt -Wall -g -Og -static-libgcc -std=c++11 -lpthread -lboost_thread && 
+// "/home/andylei/Online-Judge/leetcode-cpp/multithread/"testmt
 int main() {
     int threadnum = 5;
     boost::thread_group threads;
@@ -25,7 +27,7 @@ int main() {
     for (int i = 0; i < threadnum; i++) {
         res_vec.push_back({});
     }
-    
+
     // for (int i = 0; i < threadnum; i++) {
     //     // boost::ref 传引用进去
     //     threads.add_thread(new boost::thread(&threadFunc, i, boost::ref(res_vec[i])));
