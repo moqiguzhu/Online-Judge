@@ -54,6 +54,7 @@ class PriorityHeap(object):
         t = heapq.heappop(self._data)
         while t:
             if t[2] in self.d:
+                self.d.pop(t[2])
                 return t[2]
             t = heapq.heappop(self._data)
         return None
